@@ -13,7 +13,7 @@ namespace blog.Repository
             _connection = connection;
         }
         public IEnumerable<Role> GetAll()
-        //Expression Body
+        //Expression Body <<
             => _connection.GetAll<Role>();
 
 
