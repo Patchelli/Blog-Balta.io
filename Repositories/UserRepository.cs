@@ -2,7 +2,7 @@ using blog.Models;
 using Dapper.Contrib.Extensions;
 using Microsoft.Data.SqlClient;
 
-namespace blog.Repository
+namespace blog.Repositories
 {
     public class UserRepository
     {

@@ -1,7 +1,5 @@
-﻿// See https://aka.ms/new-console-template for more information
-using blog.Models;
-using blog.Repository;
-using Dapper.Contrib.Extensions;
+﻿using blog.Models;
+using blog.Repositories;
 using Microsoft.Data.SqlClient;
 
 const string CONNECTION_STRING = @"Server=localhost,1433;Database=blog;User ID=sa;Password=1q2w3e4r@#$;Trusted_Connection=False; TrustServerCertificate=True;";
@@ -9,6 +7,7 @@ var connection = new SqlConnection(CONNECTION_STRING);
 connection.Open();
 ReadUsers(connection);
 ReadRoles(connection);
+ReadTag(connection);
 // ReadUser();
 // CreateUser();
 // UpdateUser();
@@ -18,20 +17,31 @@ connection.Close();
 //buscar todos os usuarios
 static void ReadUsers(SqlConnection connection)
 {
-    var repository = new UserRepository(connection);
-    var users = repository.GetAll();
+    var repository = new Repository<User>(connection);
+    var itens = repository.GetAll();
 
-    foreach (var user in users)
-        System.Console.WriteLine(user.Name);
+    foreach (var item in itens)
+        System.Console.WriteLine(item.Name);
 }
 
 
 //buscar todos os usuarios
 static void ReadRoles(SqlConnection connection)
 {
-    var repository = new RoleRepository(connection);
-    var roles = repository.GetAll();
+    var repository = new Repository<Role>(connection);
+    var itens = repository.GetAll();
 
-    foreach (var role in roles)
-        System.Console.WriteLine(role.Name);
+    foreach (var item in itens)
+        System.Console.WriteLine(item.Name);
+}
+
+
+//buscar todos os usuarios
+static void ReadTag(SqlConnection connection)
+{
+    var repository = new Repository<Tag>(connection);
+    var itens = repository.GetAll();
+
+    foreach (var item in itens)
+        System.Console.WriteLine(item.Name);
 }
