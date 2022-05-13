@@ -8,6 +8,7 @@ const string CONNECTION_STRING = @"Server=localhost,1433;Database=blog;User ID=s
 var connection = new SqlConnection(CONNECTION_STRING);
 connection.Open();
 ReadUsers(connection);
+ReadRoles(connection);
 // ReadUser();
 // CreateUser();
 // UpdateUser();
@@ -22,4 +23,15 @@ static void ReadUsers(SqlConnection connection)
 
     foreach (var user in users)
         System.Console.WriteLine(user.Name);
+}
+
+
+//buscar todos os usuarios
+static void ReadRoles(SqlConnection connection)
+{
+    var repository = new RoleRepository(connection);
+    var roles = repository.GetAll();
+
+    foreach (var role in roles)
+        System.Console.WriteLine(role.Name);
 }
