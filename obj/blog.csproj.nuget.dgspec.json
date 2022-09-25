@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\balta\\blog\\blog.csproj": {}
+    "C:\\projects\\balta\\Blog-Balta.io\\blog.csproj": {}
   },
   "projects": {
-    "D:\\balta\\blog\\blog.csproj": {
+    "C:\\projects\\balta\\Blog-Balta.io\\blog.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\balta\\blog\\blog.csproj",
+        "projectUniqueName": "C:\\projects\\balta\\Blog-Balta.io\\blog.csproj",
         "projectName": "blog",
-        "projectPath": "D:\\balta\\blog\\blog.csproj",
+        "projectPath": "C:\\projects\\balta\\Blog-Balta.io\\blog.csproj",
         "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "D:\\balta\\blog\\obj\\",
+        "outputPath": "C:\\projects\\balta\\Blog-Balta.io\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -63,7 +63,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -72,7 +73,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.102\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     }
