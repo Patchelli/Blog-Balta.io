@@ -1,47 +1,82 @@
-﻿using blog.Models;
+﻿using System;
+using blog.Models;
 using blog.Repositories;
+using Blog.Models;
+using Blog.Repositories;
 using Microsoft.Data.SqlClient;
 
-const string CONNECTION_STRING = @"Server=localhost,1433;Database=Blog;User ID=sa;Password=1q2w3e4r@#$;Trusted_Connection=False; TrustServerCertificate=True;";
-var connection = new SqlConnection(CONNECTION_STRING);
-connection.Open();
-ReadUsers(connection);
-ReadRoles(connection);
-ReadTag(connection);
-// ReadUser();
-// CreateUser();
-// UpdateUser();
-// DeleteUser();
-connection.Close();
-
-//buscar todos os usuarios
-static void ReadUsers(SqlConnection connection)
+namespace Blog
 {
-    var repository = new Repository<User>(connection);
-    var itens = repository.GetAll();
+    class Program
+    {
+        private const string CONNECTION_STRING = @"Server=localhost,1433;Database=Blog;User ID=sa;Password=1q2w3e4r@#$;Trusted_Connection=False; TrustServerCertificate=True";
 
-    foreach (var item in itens)
-        System.Console.WriteLine(item.Name);
-}
+        static void Main(string[] args)
+        {
+            using var connection = new SqlConnection(CONNECTION_STRING);
+            var repository = new Repository<User>(connection);
 
+            // CreateUser(repository);
+            // UpdateUser(repository);
+            // DeleteUser(repository);
+            // ReadUser(repository);
+            ReadUsers(repository);
+            // ReadWithRoles(connection);
+        }
 
-//buscar todos os usuarios
-static void ReadRoles(SqlConnection connection)
-{
-    var repository = new Repository<Role>(connection);
-    var itens = repository.GetAll();
+        private static void CreateUser(Repository<User> repository)
+        {
+            var user = new User
+            {
+                Bio = "8x Microsoft MVP",
+                Email = "andre@balta.io",
+                Image = "https://balta.io/andrebaltieri.jpg",
+                Name = "André Baltieri",
+                Slug = "andre-baltieri",
+                PasswordHash = Guid.NewGuid().ToString()
+            };
 
-    foreach (var item in itens)
-        System.Console.WriteLine(item.Name);
-}
+            repository.Create(user);
+        }
 
+        private static void ReadUsers(Repository<User> repository)
+        {
+            var users = repository.Read();
+            foreach (var item in users)
+                Console.WriteLine(item.Email);
+        }
 
-//buscar todos os usuarios
-static void ReadTag(SqlConnection connection)
-{
-    var repository = new Repository<Tag>(connection);
-    var itens = repository.GetAll();
+        private static void ReadUser(Repository<User> repository)
+        {
+            var user = repository.Read(2);
+            Console.WriteLine(user?.Email);
+        }
 
-    foreach (var item in itens)
-        System.Console.WriteLine(item.Name);
+        private static void UpdateUser(Repository<User> repository)
+        {
+            var user = repository.Read(2);
+            user.Email = "hello@balta.io";
+            repository.Update(user);
+
+            Console.WriteLine(user?.Email);
+        }
+
+        private static void DeleteUser(Repository<User> repository)
+        {
+            var user = repository.Read(2);
+            repository.Delete(user);
+        }
+
+        private static void ReadWithRoles(SqlConnection connection)
+        {
+            var repository = new UserRepository(connection);
+            var users = repository.ReadWithRole();
+
+            foreach (var user in users)
+            {
+                Console.WriteLine(user.Email);
+                foreach (var role in user.Roles) Console.WriteLine($" - {role.Slug}");
+            }
+        }
+    }
 }
