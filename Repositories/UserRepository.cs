@@ -1,8 +1,5 @@
-using System.Collections.Generic;
-using System.Linq;
+
 using blog.Models;
-using blog.Repositories;
-using Blog.Models;
 using Dapper;
 using Microsoft.Data.SqlClient;
 
